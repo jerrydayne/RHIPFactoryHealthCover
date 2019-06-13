@@ -61,74 +61,19 @@
 
     <div class="house">
         <div class="kwali">
-            <div class="solace2">LUXURY INSURANCE</div>
+            <div class="solace2">LUXURY PLANS</div>
             <h6><i>1 plan(s) found...</i></h6>
         </div>
         <!--Results start here-->
+
         <section class="menu-list-area section-gap">
             <div class="container">
                 <div id="pills-tabContent" class="tab-content absolute">
                     <div class="tab-pane fade show active" id="pizza" role="tabpanel" aria-labelledby="pizza-tab">
 
+                        <div id="listPlansLuxury">
                             
-                        <div class="single-menu-list row justify-content-between align-items-center">
-                                    <div class="col-lg-9">
-                                        <a href="#">
-                                            <h4 id="hmo">Premier Medicaid ltd</h4>
-                                        </a>
-                                        <p id="summary">
-                                            our luxury plan covers all your medical expensis
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-3 flex-row d-flex price-size">
-                                        <div class="s-price col">
-                                            <h4>Naira</h4>
-                                            <span id="priceNaira">N35,000</span>
-                                        </div>
-                                        <div class="s-price col">
-                                            <h4>Dollar</h4>
-                                            <span id="priceDollar">$20</span>
-                                        </div>
-                                        <div class="col-7 text-center">
-                                            <button id="buy" class="customPrevBtn btnz btn-danger m-1">BUY</button>
-                                        </div>
-                                    </div>
-        
-                                    <div class="container">
-                                        <div class="row">
-                                          <div class="col-xs-12 ">
-                                            <nav>
-                                              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active" id="nav-features-tab" data-toggle="tab" href="#nav-features" role="tab" aria-controls="nav-features" aria-selected="false">Features</a>
-                                                <a class="nav-item nav-link" id="nav-benfits-tab" data-toggle="tab" href="#nav-benefits" role="tab" aria-controls="nav-benefits" aria-selected="false">Benefits & Coverage</a>
-                                                <a class="nav-item nav-link" id="nav-exclusion-tab" data-toggle="tab" href="#nav-exclusion" role="tab" aria-controls="nav-exclusion" aria-selected="false">Exclusion</a>
-                                                <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About Us</a>
-                                              </div>
-                                            </nav>
-                                             <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                                              <div class="tab-pane fade show active" id="nav-features" role="tabpanel" aria-labelledby="nav-features-tab">
-                                                <p><ul><li>for couples: -20%</li><li>for children: -50%</li><li>on auto-renewal: 2 months free</li></ul></p>
-                                              </div> 
-                                              <div class="tab-pane fade" id="nav-benefits" role="tabpanel" aria-labelledby="nav-benefits-tab">
-                                                <p id="benefits">
-                                                    online ineraction with doctors
-                                                </p>
-                                              </div>
-                                              <div class="tab-pane fade" id="nav-exclusion" role="tabpanel" aria-labelledby="nav-exclusion-tab">
-                                                <p id="exclusion">No treatment on credit credit</p>
-                                              </div>
-                                              <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                                <p id="aboutUs">Premier Medicaid ltd 
-                                                    we aim towards making healthcare affordable
-                                                    to our insured individuals.
-                                                </p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                    </div>
-                              </div>
-
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,9 +98,85 @@
     <script src="js/jquery.sticky.js"></script>
 
 
-    <script src="js/main.js"></script>
-    
+    <script>
+        // $.get(`https://healthcoverapi.herokuapp.com/plan/type/Luxury`).done(function (data) {
+            $.get(`http://localhost:7122/plan/type/Luxury`).done(function (data) {
+                    console.log(data);
+                    let listPlans = document.getElementById('listPlansLuxury');
+                    for (var i = 0; i < data.length; i++) {
+                        let innerPlans = document.createElement('div')
 
+                        console.log(innerPlans)
+                        innerPlans.classList.add('inner')
+                        let children = listPlans.appendChild(innerPlans);
+                        let inners = document.getElementsByClassName('inner');
+                        for (var index = 0; index < inners.length; index++) {
+                            if (index === i) {
+                                children.innerHTML = `
+                                <div class="single-menu-list row justify-content-between align-items-center">
+                                            <div class="col-lg-9">
+                                                <a href="#">
+                                                    <h4 id="hmo">Premier Medicaid ltd</h4>
+                                                </a>
+                                                <p id="summary">${data[i].summary}</p>
+                                            </div>
+                                            <div class="col-lg-3 flex-row d-flex price-size">
+                                                <div class="s-price col">
+                                                    <h4>Naira</h4>
+                                                    <span id="priceNaira">N${data[i].priceNaira}</span>
+                                                </div>
+                                                <div class="s-price col">
+                                                    <h4>Dollar</h4>
+                                                    <span id="priceDollar">$${data[i].priceDollar}</span>
+                                                </div>
+                                                <div class="col-7 text-center">
+                                                    <button id="buy" class="customPrevBtn btnz btn-danger m-1" onclick="funcClick()">BUY</button>
+                                                </div>
+                                            </div>
+                
+                                            <div class="container">
+                                                <div class="row">
+                                                  <div class="col-xs-12 ">
+                                                    <nav>
+                                                      <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link active" id="nav-features-tab" data-toggle="tab" href="#nav-features" role="tab" aria-controls="nav-features" aria-selected="false">Features</a>
+                                                        <a class="nav-item nav-link" id="nav-benfits-tab" data-toggle="tab" href="#nav-benefits" role="tab" aria-controls="nav-benefits" aria-selected="false">Benefits & Coverage</a>
+                                                        <a class="nav-item nav-link" id="nav-exclusion-tab" data-toggle="tab" href="#nav-exclusion" role="tab" aria-controls="nav-exclusion" aria-selected="false">Exclusion</a>
+                                                        <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About Us</a>
+                                                      </div>
+                                                    </nav>
+                                                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                                      <div class="tab-pane fade show active" id="nav-features" role="tabpanel" aria-labelledby="nav-features-tab">
+                                                        <p>${data[i].feature}</p>
+                                                      </div> 
+                                                      <div class="tab-pane fade" id="nav-benefits" role="tabpanel" aria-labelledby="nav-benefits-tab">
+                                                        <p id="benefits">${data[i].benefit}</p>
+                                                      </div>
+                                                      <div class="tab-pane fade" id="nav-exclusion" role="tabpanel" aria-labelledby="nav-exclusion-tab">
+                                                        <p id="exclusion">${data[i].exclusion}</p>
+                                                      </div>
+                                                      <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                                        <p id="aboutUs">${data[i].aboutUs}</p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                      </div> `
+                            }
+                        }
+                        console.log(data);
+			}
+		}).fail(function (data){
+			console.log( data);
+        });
+          
+        function funcClick() {
+            location.pathname = (localStorage.getItem('token')) ? '/payment.html' : '/signup.html';
+        }
+    </script>
+
+    <script src="js/main.js"></script>
 </body>
 
 </html>

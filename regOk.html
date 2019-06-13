@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <title>HealthCover &mdash; Website RHIPFactory</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+          
+        <div class="container-fluid">
+          <div class="d-flex align-items-center">
+              <div class="site-logo mr-auto w-25"><a href="index.html">
+                  <div class="logo_div">
+                    <img src="images/healthcover-logo-03.png" alt="" class="logo"/>
+                  </div>
+                </a></div>
+  
+            <div class="ml-auto w-25">
+              <nav class="site-navigation position-relative text-right" role="navigation">
+                  <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
+                      <li class="cta">
+                          <button onclick="document.getElementById('login-wrapper').style.display='block'" class="customPrevBtn btnM btn-danger m-1"> Login</button>
+                           
+                          <!--login modal start-->
+                      <div id="login-wrapper" class="modal">
+                          <form class="modal-content animate">
+                        
+                              <div class="imgcontainer">
+                                  <span onclick="document.getElementById('login-wrapper').style.display='none'" class="closeX" title="close popup">&times;</span>
+                                  <h1 style="text-align: center;">welcome!</h1>
+                              </div>
+                        
+                              <div class="container">
+                                  <input type="text" placeholder="Enter your phone number" name="phoneNumber" id="phoneNumberL" required>
+                                  <input type="password" placeholder="Enter your password" name="password" id="passwordL" required>
+                                  <select id="userTypeL" class="modal-select" >
+                                      <option value="select-choice">- - -SELECT USER TYPE- - -</option>
+                                      <option value="user">INDIVIDUAL</option>
+                                      <option value="hmo">HMO (healthcare management organisation)</option>
+                                      <option value="hcp">HCP (health care provider)</option>
+                                      <option value="mha">MHA (mutual health association)</option>
+                                    </select>
+                                  <button class="btnM" type="submit"  onclick="loginFunction(event)">Login</button>
+                                  <div class="notifiers"><a  href="#"><i>forgot your password?</i></a></div>
+                                  <div class="notifiers"><a href="#"><i>or you want to learn more about HealthCover?</i></a></div>
+                              </div>
+                              
+                          </form>
+                        </div>
+                        <!--login modal ends-->
+                          </li>
+                  </ul> 
+              </nav>
+              <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
+            </div>
+          </div>
+        </div>
+        
+      </header>
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+      
+      
+     
+        
+
+  <!-- site-starts -->
+  
+  <div class="house" >
+ 
+    
+    <div id="welcomeNote">
+      <!--content appears here-->
+    </div>
+ 
+
+    <!--footer starts-->
+    <div class="solex" style="margin-top:35%">
+        <div class="col-md-12">
+          <div class="border-top pt-5">
+          <p style="text-align:center">
+      Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This site is built by <i class="icon-heart" aria-hidden="true"></i> - <a href="https://healthcover.com" target="_blank" >RHIPFactory</a>
+     </p>
+          </div>
+        </div>
+        
+      </div>
+    <!--footer ends-->
+    </div>
+    
+   
+
+    <!-- site-ends -->
+
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.fancybox.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+  <script src="js/need.js"></script>
+    
+
+  
+  <script>
+      $.get(`http://localhost:7122/${localStorage.getItem('userType')}/${localStorage.getItem('id')}`).done(function (data) {
+                  console.log(data);
+                  let listPlans = document.getElementById('welcomeNote');
+                      let innerPlans = document.createElement('div')
+                       data = data.data
+                      console.log(innerPlans)
+                      innerPlans.classList.add('inner')
+                      let children = listPlans.appendChild(innerPlans);
+                      let inners = document.getElementsByClassName('inner');
+                              children.innerHTML = `
+                               <section class="bg-light p-5">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col text-center mb-3">
+                                                <h1 class="text-danger display-2 text-uppercase">Congratulations!</h1>
+                                                    <p>Dear ${data.fullName},
+                                                    <br/>your account have been created successfully, please login to access your dashboard</p>
+                                                    <h2>Phone Number: ${data.phoneNumber} </h2>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section> `
+                      console.log(data);
+ 
+  }).fail(function (data){
+    console.log( data);
+  });
+  </script>
+  </body>
+</html>

@@ -39,7 +39,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
-		<div class="topic">MAIN MENU</div>
+		<div class="topic"><a href="hmoDB.html">MAIN MENU</a></div>
 		<ul class="nav menu">
 			<li class="active"><a href="/"><em class="fa fa-home">&nbsp;</em> HOME</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
@@ -66,7 +66,7 @@
 	<script>
 		document.getElementById('logout').addEventListener('click', function (event) {
 			localStorage.removeItem('token')
-			location.pathname = '/login.html'
+			location.pathname = '/index.html'
 		})
 	</script>
 	<!--content header starts-->
@@ -113,7 +113,8 @@
 					</div>
 
 					<div class="cover_HMO">
-						<div id="listPlans" class="insider">
+						<div class="table200-head">
+						<div id="listPlans" class="insider" style="margin: 5%"></div>
 						</div>
 					</div>
 				</div>
@@ -161,7 +162,8 @@
 		// 		console.log('Error: ' + err);
 		// 	}
 		// });
-		$.get(`http://192.168.0.100:7221/getHMOPlan/${localStorage.getItem('id')}`).done(function(data){
+		//$.get(`https://healthcoverapi.herokuapp.com/getHMOPlan/${localStorage.getItem('id')}`).done(function(data){
+			$.get(`http://localhost:7122/getHMOPlan/${localStorage.getItem('id')}`).done(function(data){
 			console.log(data);
 			let listPlans = document.getElementById('listPlans');
 			for(var i = 0; i < data.length; i++){
@@ -175,17 +177,108 @@
 					if (index === i) {
 						children.innerHTML = `
 					<h1 id="planType" class="HMO_header">${data[i].planType}</h1>
-					<p> Summary: <span id="plansummary">${data[i].summary}</span></p>
-					<p> Features: <span id="planfeature">${data[i].feature}</span></p>
-					<p> Benefits: <span id="planbenefit">${data[i].benefit}</span></p>
-					<p> Exclusion: <span id="planexclusion">${data[i].exclusio}</span></p>
-					<p> About Us: <span id="planaboutUs"></span>${data[i].aboutUs}</p>
-					<p> Price (Naira): <span id="planpriceNaira">${data[i].priceNaira}</span></p>
-					<p> price (Dollar): <span id="planpriceDollar">${data[i].priceDollar}</span></p>
+					<h4 class="listPlan"> Summary: <span id="plansummary">${data[i].summary}</span></h4>
+					<h4 class="listPlan"> Features: <span id="planfeature">${data[i].feature}</span></h4>
+					<h4 class="listPlan"> Benefits: <span id="planbenefit">${data[i].benefit}</span></h4>
+					<h4 class="listPlan"> Exclusion: <span id="planexclusion">${data[i].exclusion}</span></h4>
+					<h4 class="listPlan"> About Us: <span id="planaboutUs"></span>${data[i].aboutUs}</p>
+					<h4 class="listPlan"> Price (Naira): <span id="planpriceNaira">${data[i].priceNaira}</span></h4>
+					<h4 class="listPlan"> price (Dollar): <span id="planpriceDollar">${data[i].priceDollar}</span></h4>
 
 					<div class="row">
+							<input type="submit" onclick="document.getElementById('updatePlan-wrapper').style.display='block'" class="btn btn-danger btn-pill" value="Edit plan"></input> 
+						
+							<!--updatePlan modal start-->
+                      <div id="updatePlan-wrapper" class="modal">
+                        <form class="modal-content animate">
+                      
+                            <div class="imgcontainer">
+                                <span onclick="document.getElementById('updatePlan-wrapper').style.display='none'" class="closeX" title="close popup">&times;</span>
+                            </div>
+                      
+							<div class="container"> 
+					<!--Edit form-->
+                <div class="container">
+                        <form onsubmit="createPlanFunction(event)" id="plan_form">
+                          <div class="row">
+
+                              <div class="wrap-table100" style="width:90%; margin:3%">
+                                <div class="table100 ver2 m-b-110">
+                                  <div class="table100-head">
+                                    <table>
+                                      <thead>
+                                        <tr class="row100 head">
+                                          <th class="cell">UPDATING PLAN</th>
+                                        </tr>
+                                      </thead>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+							  
+							  <form id="updatePlan">
+                              <div class="input-group input-group-icon" style="width:100%;">
+                                <select id="planType">
+                                  <option value="Plan">Select Plan Type</option>
+                                  <option value="Basic">Basic</option>
+                                  <option value="Comprehensive">Comprehensive</option>
+                                  <option value="Premium">Premium</option>
+                                  <option value="Luxury">Luxury</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group input-group-icon">
+                              <input id="hmoId" type="text" placeholder="" value=""  hidden/>
+                            </div>
+
+							<div class="input-group input-group-icon">
+                              <input id="UpdateSummary" type="text" placeholder="Summary of plan" value="${data[i].summary}" required/>
+                              <div class="input-icon"><i class="fa fa-"></i></div>
+                            </div>
+
+                            <div class="input-group input-group-icon">
+                                    <input id="UpdateFeature" type="text" placeholder="Features of plan"  value="${data[i].feature}" required/>
+                                    <div class="input-icon"><i class="fa fa-"></i></div>
+                                  </div>
+                      
+                            <div class="input-group input-group-icon">
+                              <input id="UpdateBenefit" type="text" placeholder="Benefits of plan" value="${data[i].benefit}"/>
+                              <div class="input-icon"><i class="fa fa-"></i></div>
+                            </div>
+
+                            <div class="input-group input-group-icon">
+                                    <input id="UpdateExclusion" type="text" placeholder="plan Exclusion" value="${data[i].exclusion}" required/>
+                                    <div class="input-icon"><i class="fa fa-"></i></div>
+                                  </div>
+                                  
+                            <div class="input-group input-group-icon">
+                                <input id="UpdateAboutUs" type="text" placeholder="About the HMO" value="${data[i].aboutUs}"/>
+                                <div class="input-icon"><i class="fa fa-"></i></div>
+                              </div>
+
+                              <div class="input-group input-group-icon">
+                                <input id="UpdatePriceNaira" type="text" placeholder="price in Naira" value="${data[i].priceNaira}"/>
+                                <div class="input-icon"><i class="fa fa-"></i></div>
+                              </div>
+
+                              <div class="input-group input-group-icon">
+                                <input id="UpdatePriceDollar" type="text" placeholder="price in Dollar" value="${data[i].priceDollar}" />
+                                <div class="input-icon"><i class="fa fa-"></i></div>
+                              </div>
+                            </form>
+                            <input type="submit" onclick="updatePlanFunction(event, ${data[i]._id})" class="btn btn-primary btn-pill" value="Update Plan"></input>
+                          </div>
+                        </form>
+                      </div>
+           <!--edit form ends-->
+                            </div>
+                            
+                        </form>
+					  </div>
+					  <!--updatePlan modal ends-->
+					  
 							<input type="submit" class="btn btn-danger btn-pill"
-								value="update plan"></input>
+								value="Delete Plan"></input>
 						</div>
 				`
 					}
@@ -204,6 +297,27 @@
 			console.log('Error: ' + data);
 		});
 
+function updatePlanFunction(event, id) {
+  e.preventDefault();
+  const sendObj = {
+  planType: $('#planType').val(),
+  summary: $('#UpdateSummary').val(),
+  feature: $('#UpdateFeature').val(),
+  benefit: $('#UpdateBenefit').val(),
+  exclusion: $('#exclusion').val(),
+  aboutUs: $('#UpdateAboutUs').val(),
+  priceNaira: $('#UpdatePriceNaira').val(),
+  priceDollar: $('#UpdatepPiceDollar').val(),
+  }
+  console.log(sendObj);
+      //$.patch(`http://healthcoverapi.herokuapp.com/plan/${localStorage.getItem('id')}`,
+      $.patch(`http://localhost:7122/plan/${id}`,
+      sendObj,
+      function (response, status) {
+          let userData = response.data;
+         console.log('object', userData)
+      })
+  }
 	</script>
 
 	</body>

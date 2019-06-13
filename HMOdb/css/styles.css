@@ -1736,3 +1736,87 @@ th, td {
     margin-inline-end: 0px;
 }
 
+.listPlan {
+  margin: 2%;
+  color: #0C0B1A;
+  overflow: hidden;
+  font-size: 11px;
+}
+
+
+/*Modal popup*/
+        /*full width of input fields*/
+        input[type=text], input[type=password] {
+          width: 90%;
+          padding: 12px 20px;
+          margin: 8px 26px;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;font-size: 16px;
+      }
+      .modal-select{
+        width: 90%;
+        padding: 12px 20px;
+        margin: 8px 26px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;font-size: 16px;
+        align-content: center;
+      }
+      /*buttons style*/
+      .modal-button{
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 26px;
+          border: none;
+          cursor: pointer;
+          width: 90%;
+          font-size: 20px;
+      }
+      .modal-button:hover{
+          opacity: 0.8;
+      }
+
+      .modal{
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0, 0, 0, 0.4)
+      }
+
+      /*modal content*/
+      .modal-content{
+          background-color: #fefefe;
+          margin: 10% 5% 5% auto;
+          border: 1px solid #888;
+          width: 75%;
+          padding-bottom: 30px;
+      }
+
+      /*close button*/
+      .closeX{
+          position: absolute;
+          right: 25px;
+          top: 0;
+          color: #000;
+          font-size: 35px;
+          font-weight: bold;
+      }
+      .closeX:hover, .closeX:focus{
+          color: red;
+          cursor: pointer;
+      }
+
+      /*adding animation*/
+      .animate{
+          animation: zoom 0.6s;
+      }@keyframes zoom{
+          from { transform: scale(0)}
+          to { transform: scale(1)}
+      }

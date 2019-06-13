@@ -40,7 +40,7 @@
         <div class="clear"></div>
       </div>
       <div class="divider"></div>
-      <div class="topic">MAIN MENU</div>
+      <div class="topic"><a class="" href="hmoDB.html">MAIN MENU</a></div>
       <ul class="nav menu">
         <li class="active"><a href="userDB.html"><em class="fa fa-home">&nbsp;</em> HOME</a></li>
         <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
@@ -92,19 +92,20 @@
                               <div class="input-group input-group-icon">
                                   <h4>Complete Your Registration</h4>
                               </div>
+                              <br>
 
                             <div class="input-group input-group-icon">
-                              <input type="text" placeholder="Name of Organisation" required/>
+                              <input id="hmoName" type="text" placeholder="Name of Organisation" required/>
                               <div class="input-icon"><i class="fa fa-crown"></i></div>
                             </div>
 
                             <div class="input-group input-group-icon">
-                                    <input type="text" placeholder="Contact Adress" required/>
+                                    <input id="hmoAddress" type="text" placeholder="Contact Adress" required/>
                                     <div class="input-icon"><i class="fa fa-home"></i></div>
                                   </div>
                       
                             <div class="input-group input-group-icon">
-                              <input type="text" placeholder="Postal Code"/>
+                              <input id="hmoPostalCode" type="text" placeholder="Postal Code"/>
                               <div class="input-icon"><i class="fa fa-one"></i></div>
                             </div>
 
@@ -114,25 +115,25 @@
                                   </div>
                                   
                             <div class="input-group input-group-icon">
-                                <input type="text" placeholder="website Adress"/>
+                                <input id="hmoWebsite" type="text" placeholder="website Adress"/>
                                 <div class="input-icon"><i class="fa fa-web"></i></div>
                               </div>
                             
                             <div class="input-group input-group-icon">
-                              <input type="text" placeholder="Phone Number" required/>
+                              <input id="hmoPhoneNumber" type="text" placeholder="Phone Number" required/>
                               <div class="input-icon"><i class="fa fa-phone"></i></div>
                             </div>  
 
                           <div class="input-group input-group-icon">
-                              <input type="text" placeholder="Acreditation Date"/>
+                              <input id="hmoAcreditationDate" type="text" placeholder="Acreditation Date"/>
                               <div class="input-icon"><i class="fa fa-calendar-alt"></i></div>
                             </div> 
                             
                           <div class="input-group input-group-icon">
-                              <input type="text" placeholder="Acreditation Number"/>
+                              <input id="hmoAcreditationNumber" type="text" placeholder="Acreditation Number"/>
                               <div class="input-icon"><i class="fa fa-one"></i></div>
                             </div> 
-
+                            <!--
                               <div class="input-group input-group-icon" style="width:100%;">
                                   <select >
                                     <option value="Plan">Select Plan Type</option>
@@ -142,7 +143,7 @@
                                     <option value="Luxury">Luxury</option>
                                   </select>
                               </div>
-
+                            -->
                               <div class="input-group input-group-icon">
                                   <input type="text" placeholder="List of Providers" />
                                 </div>
@@ -176,17 +177,7 @@
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
-	<script>
-		window.onload = function () {
-	var chart1 = document.getElementById("line-chart").getContext("2d");
-	window.myLine = new Chart(chart1).Line(lineChartData, {
-	responsive: true,
-	scaleLineColor: "rgba(0,0,0,.2)",
-	scaleGridLineColor: "rgba(0,0,0,.05)",
-	scaleFontColor: "#c5c7cc"
-	});
-};
-	</script>
+
 		
 </body>
 </html>
